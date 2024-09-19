@@ -1,163 +1,149 @@
-const path = require('path');
-const config = require('./config/website');
+const config = require('./src/config');
 
 module.exports = {
   siteMetadata: {
     title: config.siteTitle,
-    description: config.siteDescription,
-    twitter: config.twitter,
     siteUrl: config.siteUrl,
-    siteLogo: config.siteLogo,
-    siteBanner: config.siteBanner,
+    description: config.siteDescription,
+    image: '/images/og.png',
   },
   plugins: [
-    // MARKDOWN
+    `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-styled-components`,
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sitemap`,
+    `gatsby-plugin-robots-txt`,
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: 'Yashita Namdeo',
+        short_name: 'Yashita Namdeo',
+        start_url: '/',
+        background_color: config.colors.darkNavy,
+        theme_color: config.colors.navy,
+        display: 'minimal-ui',
+        icon: 'src/images/logo.png',
+      },
+    },
+    `gatsby-plugin-offline`,
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'content',
+        path: `${__dirname}/content/`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/content/posts`,
+        name: `posts`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/content/projects`,
+        name: `projects`,
+      },
+    },
     {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [
-          `gatsby-remark-embedder`,
           {
-            resolve: `gatsby-remark-autolink-headers`,
+            // https://www.gatsbyjs.org/packages/gatsby-remark-external-links
+            resolve: 'gatsby-remark-external-links',
             options: {
-              className: `gatsby-remark-autolink`,
-              maintainCase: true,
-              removeAccents: true,
+              target: '_blank',
+              rel: 'nofollow noopener noreferrer',
             },
           },
           {
+            // https://www.gatsbyjs.org/packages/gatsby-remark-images
+            resolve: 'gatsby-remark-images',
+            options: {
+              maxWidth: 700,
+              linkImagesToOriginal: true,
+              quality: 90,
+              tracedSVG: { color: config.colors.green },
+            },
+          },
+          {
+            // https://www.gatsbyjs.org/packages/gatsby-remark-code-titles/
+            resolve: 'gatsby-remark-code-titles',
+          }, // IMPORTANT: this must be ahead of other plugins that use code blocks
+          {
+            // https://www.gatsbyjs.org/packages/gatsby-remark-prismjs
             resolve: `gatsby-remark-prismjs`,
             options: {
+              // Class prefix for <pre> tags containing syntax highlighting;
+              // defaults to 'language-' (e.g. <pre class="language-js">).
+              // If your site loads Prism into the browser at runtime,
+              // (e.g. for use with libraries like react-live),
+              // you may use this to prevent Prism from re-processing syntax.
+              // This is an uncommon use-case though;
+              // If you're unsure, it's best to use the default value.
               classPrefix: 'language-',
+              // This is used to allow setting a language for inline code
+              // (i.e. single backticks) by creating a separator.
+              // This separator is a string and will do no white-space
+              // stripping.
+              // A suggested value for English speakers is the non-ascii
+              // character '›'.
               inlineCodeMarker: null,
+              // This lets you set up language aliases.  For example,
+              // setting this to '{ sh: "bash" }' will let you use
+              // the language "sh" which will highlight using the
+              // bash highlighter.
               aliases: {},
-              showLineNumbers: true,
+              // This toggles the display of line numbers globally alongside the code.
+              // To use it, add the following line in gatsby-browser.js
+              // right after importing the prism color scheme:
+              //  require("prismjs/plugins/line-numbers/prism-line-numbers.css")
+              // Defaults to false.
+              // If you wish to only show line numbers on certain code blocks,
+              // leave false and use the {numberLines: true} syntax below
+              showLineNumbers: false,
+              // If setting this to true, the parser won't handle and highlight inline
+              // code used in markdown i.e. single backtick code like `this`.
               noInlineHighlight: false,
+              // This adds a new language definition to Prism or extend an already
+              // existing language definition. More details on this option can be
+              // found under the header "Add new language definition or extend an
+              // existing language" below.
+              languageExtensions: [
+                {
+                  language: 'superscript',
+                  extend: 'javascript',
+                  definition: {
+                    superscript_types: /(SuperType)/,
+                  },
+                  insertBefore: {
+                    function: {
+                      superscript_keywords: /(superif|superelse)/,
+                    },
+                  },
+                },
+              ],
+              // Customize the prompt used in shell output
+              // Values below are default
+              prompt: {
+                user: 'root',
+                host: 'localhost',
+                global: false,
+              },
             },
           },
-          {
-            resolve: `gatsby-remark-images`,
-            options: {
-              maxWidth: 590,
-              showCaptions: true,
-            },
-          },
-          `gatsby-plugin-social-banners`,
         ],
       },
     },
-
-    // SOURCE FILE SYSTEM -
-    // SOURCE JSON
-    `gatsby-transformer-json`,
     {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        path: `${__dirname}/content/json`,
-      },
-    },
-    // SOURCE MARKDOWN
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: 'case-studies',
-        path: `${__dirname}/content/case-studies`,
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: 'blog',
-        path: `${__dirname}/content/blog/`,
-      },
-    },
-
-    // IMAGE TRANSFORMER
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `images`,
-        path: `src/static/images`,
-      },
-    },
-
-    // manifest & helmet
-    `gatsby-plugin-react-helmet`,
-
-    {
-      resolve: `gatsby-plugin-manifest`,
-      options: {
-        name: config.siteTitleAlt,
-        short_name: config.siteShortName,
-        start_url: `/`,
-        background_color: config.backgroundColor,
-        theme_color: config.themeColor,
-        display: `standalone`,
-        icon: config.siteLogo,
-      },
-    },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
-
-    // fonts
-    // https://fonts.googleapis.com/css?family=Karla:400,700|Montserrat:400,600,700,900&display=swap
-    // families: ['Karla&display=swap', 'Montserrat:400,700,900&display=swap']
-    // {
-    //   resolve: 'gatsby-plugin-web-font-loader',
-    //   options: {
-    //     custom: {
-    //       families: [
-    //         'Karla',
-    //         'Montserrat:n4,n7,n9'
-    //       ],
-    //       urls: [
-    //         'https://fonts.googleapis.com/css?family=Karla&display=swap',
-    //         'https://fonts.googleapis.com/css?family=Montserrat:400,700,900&display=swap'
-    //       ]
-    //     }
-    //   }
-    // },
-
-    // NProgress
-    {
-      resolve: `gatsby-plugin-nprogress`,
-      options: {
-        color: `#6D83F2`,
-        showSpinner: false,
-      },
-    },
-    {
-      resolve: 'gatsby-plugin-google-analytics',
+      resolve: `gatsby-plugin-google-analytics`,
       options: {
         trackingId: config.googleAnalyticsID,
-        head: true,
       },
     },
-    // others
-    {
-      resolve: 'gatsby-plugin-robots-txt',
-      options: {
-        host: config.siteUrl,
-        sitemap: `${config.siteUrl}/sitemap.xml`,
-        env: {
-          development: {
-            policy: [{ userAgent: '*', disallow: ['/'] }],
-          },
-          production: {
-            policy: [{ userAgent: '*', allow: '/', disallow: '/goodies' }],
-          },
-        },
-      },
-    },
-    {
-      resolve: `gatsby-plugin-sitemap`,
-      options: {
-        exclude: [`/blog/tags/*`, `/goodies`],
-      },
-    },
-    `gatsby-plugin-styled-components`,
   ],
 };

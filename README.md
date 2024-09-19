@@ -1,121 +1,74 @@
+<div align="center">
+  <img alt="Logo" src="https://github.com/yashitanamdeo/yashitanamdeo.github.io/blob/source/src/images/logo.png" width="100" />
+</div>
+<h1 align="center">
+  Portfolio Website Version 1
+</h1>
 <p align="center">
-  <a href="https://anuraghazra.github.io/">
-    <img alt="Gatsby" src="./src/static/logo_noalpha.svg" width="100" />
-    <h2 align="center">Anurag Hazra</h2>
-  </a>
-</p> 
-<p align="center">Creative FrontEnd Web Developer</p>
+  The first iteration of <a href="https://yashitanamdeo.github.io/" target="_blank">Yashita Namdeo's</a> portfolio built with <a href="https://www.gatsbyjs.org/" target="_blank">Gatsby</a> and hosted with <a href="https://pages.github.com/" target="_blank">Github Pages</a>
+</p>
+<!-- <p align="center">
+  Previous iterations:
+  <a href="https://github.com/chandrikadeb7/chandrikadeb7.github.io-v1" target="_blank">Version 1</a>
+</p> -->
 
-[![Build Status](https://travis-ci.org/anuraghazra/anuraghazra.github.io.svg?branch=develop)](https://travis-ci.org/anuraghazra/anuraghazra.github.io)
-![GitHub](https://img.shields.io/github/license/anuraghazra/anuraghazra.github.io)
-![Website](https://img.shields.io/website?down_message=offline&label=site&up_message=online&url=http%3A%2F%2Fanuraghazra.github.io)
+<div align="center">
+  <img alt="Demo" src="https://github.com/yashitanamdeo/yashitanamdeo.github.io/blob/source/src/images/demo.png" />
+</div>
 
+### TL;DR
 
-![Anurag Hazra Site Preview](./src/static/screenshot.png)
+Yes, you can fork this repo. Please give proper credit by linking back to [brittanychiang.com](https://brittanychiang.com). Thanks!
 
-Strained eyes? There's DarkMode too :p
+## 🛠 Installation & Set Up
 
-*NOTE: If you are using this site as a template for your own portfolio site, I would be very glad if you add a link to the original site with my name in footer*
+1. Install the Gatsby CLI
 
-## :rocket: Quick start
+   ```sh
+   npm install -g gatsby-cli
+   ```
 
-**Run the site locally**
+2. Install and use the correct version of Node using [NVM](https://github.com/nvm-sh/nvm)
 
-_NOTE: The default branch for this repo is `develop`, when you push or pull make sure you specify the correct branch_
+   ```sh
+   nvm install
+   ```
 
-### Step 1: Clone The Repo
+3. Install dependencies
 
-Fork the repository. then clone the repo locally by doing -
+   ```sh
+   yarn
+   ```
 
-```bash
-git clone https://github.com/anuraghazra/anuraghazra.github.io.git
-```
+4. Start the development server
 
-### Step 2: Install Dependencies
+   ```sh
+   npm start
+   ```
 
-cd into the directory
+## 🚀 Building and Running for Production
 
-```bash
-cd anuraghazra.github.io
-```
+1. Generate a full static production build
 
-install all the dependencies
-```bash
-npm install
-```
+   ```sh
+   npm run build
+   ```
 
-### Step 3: Start Development Server
+1. Preview the site as it will appear once deployed
 
-Then start the development Server
-```
-npm run develop
-```
-After running the development server the site should be running on https://localhost:8000
+   ```sh
+   npm run serve
+   ```
 
+## 🎨 Color Reference
 
-## :open_file_folder: What's inside?
-
-A quick look at the folder structure of this project.
-
-    .
-    ├── content
-    │   ├───blog
-    │   ├───case-studies
-    │   └───json
-    ├── cypress
-    ├── plugins
-    └── src
-        ├───components
-        │   ├───About
-        │   ├───Blog
-        │   ├───common
-        │   ├───Concepts
-        │   ├───Contact
-        │   ├───CreativeCoding
-        │   ├───Home
-        │   ├───Layout
-        │   │   └───Navbar
-        │   ├───Lightbox
-        │   ├───Projects
-        │   └───Skills
-        ├───hooks
-        ├───pages
-        ├───static
-        │   └───images
-        ├───styles
-        └───templates
-
-
-## Tools Used
-
-1. Gatsby.js (of course)
-2. Styled Components for styling
-3. Cypress for E2E Testing
-4. Jest for Unit Testing
-5. TravisCI for CI/CD
-
-## :v: Contributing
-
-*NOTE: if you want to change the [blog content](./content) or fix any typo you can do that from github's ui without cloning the repo locally*
-
-After cloning & setting up the local project you can push the changes to your github fork and make a pull request.
-
-> You can also run the tests locally to see if everything works fine with
-
-### Running tests
-```bash
-npm run test
-npm run test:e2e
-```
-
-### Pushing the changes
-
-```bash
-git add .
-git commit -m "commit message"
-git push YOUR_REPO_URL develop
-```
-
-------
-
-Made with :heart: and Gatsbyjs
+| Color          | Hex                                                                |
+| -------------- | ------------------------------------------------------------------ |
+| Navy           | ![#0a192f](https://via.placeholder.com/10/0a192f?text=+) `#0a192f` |
+| Light Navy     | ![#172a45](https://via.placeholder.com/10/0a192f?text=+) `#172a45` |
+| Lightest Navy  | ![#303C55](https://via.placeholder.com/10/303C55?text=+) `#303C55` |
+| Slate          | ![#8892b0](https://via.placeholder.com/10/8892b0?text=+) `#8892b0` |
+| Light Slate    | ![#a8b2d1](https://via.placeholder.com/10/a8b2d1?text=+) `#a8b2d1` |
+| Lightest Slate | ![#ccd6f6](https://via.placeholder.com/10/ccd6f6?text=+) `#ccd6f6` |
+| White          | ![#e6f1ff](https://via.placeholder.com/10/e6f1ff?text=+) `#e6f1ff` |
+| Green          | ![#64ffda](https://via.placeholder.com/10/64ffda?text=+) `#64ffda` |
